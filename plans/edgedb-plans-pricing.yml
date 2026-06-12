@@ -1,0 +1,158 @@
+---
+specification: API Commons Plans
+specificationVersion: '0.1'
+schema: https://raw.githubusercontent.com/api-evangelist/interface-research/main/schema/api-commons.yml#/$defs/Plans
+provider: EdgeDB
+providerId: edgedb
+created: '2026-06-12'
+modified: '2026-06-12'
+reconciled: true
+tags:
+  - Database
+  - Cloud Database
+  - PostgreSQL
+  - Managed Database
+description: >-
+  Gel (formerly EdgeDB) Cloud offers three pricing tiers: a Free tier for
+  development, a Pro tier starting at $19.50/month with scalable compute and
+  storage, and an Enterprise tier with custom pricing for dedicated clusters
+  and advanced SLAs. All tiers include unlimited reads and writes. Prices
+  reflect the aws-us-east-2 region in USD.
+sources:
+  - https://www.geldata.com/pricing
+plans:
+  - id: edgedb-free
+    name: Free
+    type: free
+    description: >-
+      Free tier intended for development and prototyping. Includes 1/4 compute
+      unit (1/2 GiB RAM, 1/16 vCPU) and up to 1 GB of disk space. Data is
+      encrypted at rest and community support is provided.
+    entries:
+      - label: Compute Units
+        name: compute_units
+        type: quota
+        metric: compute unit
+        limit: 0.25
+        timeFrame: month
+        geo: global
+        unit: 1
+        price: '0.00'
+        userMultiplied: false
+      - label: RAM
+        name: ram
+        type: quota
+        metric: GiB
+        limit: 0.5
+        timeFrame: month
+        geo: global
+        unit: 1
+        price: '0.00'
+        userMultiplied: false
+      - label: Disk Storage
+        name: disk_storage
+        type: quota
+        metric: GB
+        limit: 1
+        timeFrame: month
+        geo: global
+        unit: 1
+        price: '0.00'
+        userMultiplied: false
+      - label: Monthly Price
+        name: monthly_price
+        type: boolean
+        metric: month
+        limit: 1
+        timeFrame: month
+        geo: global
+        unit: 1
+        price: '0.00'
+        userMultiplied: false
+  - id: edgedb-pro
+    name: Pro
+    type: paid
+    description: >-
+      Production-ready tier starting at $19.50/month. Includes 1/2 compute
+      unit (1 GiB RAM, 1/8 vCPU), 10 GiB storage (with $0.50/GiB overage),
+      100 GiB transfer (with $0.10/GiB overage), unlimited reads/writes, and
+      email support.
+    entries:
+      - label: Compute Units
+        name: compute_units
+        type: quota
+        metric: compute unit
+        limit: 0.5
+        timeFrame: month
+        geo: global
+        unit: 1
+        price: '19.50'
+        userMultiplied: false
+      - label: RAM
+        name: ram
+        type: quota
+        metric: GiB
+        limit: 1
+        timeFrame: month
+        geo: global
+        unit: 1
+        price: '0.00'
+        userMultiplied: false
+      - label: Included Storage
+        name: included_storage
+        type: quota
+        metric: GiB
+        limit: 10
+        timeFrame: month
+        geo: global
+        unit: 1
+        price: '0.00'
+        userMultiplied: false
+      - label: Overage Storage
+        name: overage_storage
+        type: metered
+        metric: GiB
+        limit: -1
+        timeFrame: usage
+        geo: global
+        unit: 1
+        price: '0.50'
+        userMultiplied: false
+      - label: Included Transfer
+        name: included_transfer
+        type: quota
+        metric: GiB
+        limit: 100
+        timeFrame: month
+        geo: global
+        unit: 1
+        price: '0.00'
+        userMultiplied: false
+      - label: Overage Transfer
+        name: overage_transfer
+        type: metered
+        metric: GiB
+        limit: -1
+        timeFrame: usage
+        geo: global
+        unit: 1
+        price: '0.10'
+        userMultiplied: false
+  - id: edgedb-enterprise
+    name: Enterprise
+    type: enterprise
+    description: >-
+      Custom enterprise plan with priority support, deployment in your own
+      AWS account, custom contracts, and volume discounts. Pricing is
+      negotiated directly with the Gel team.
+    entries:
+      - label: Monthly Price
+        name: monthly_price
+        type: quota
+        metric: month
+        limit: -1
+        timeFrame: month
+        geo: global
+        unit: 1
+        price: custom
+        userMultiplied: false

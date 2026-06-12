@@ -1,0 +1,64 @@
+---
+specification: FinOps Framework
+specificationVersion: '1.0'
+schema: https://www.finops.org/framework/
+provider: EdgeDB
+providerId: edgedb
+created: '2026-06-12'
+modified: '2026-06-12'
+reconciled: true
+tags:
+  - FinOps
+  - FOCUS
+  - Database
+  - Cloud Database
+description: >-
+  FOCUS-aligned FinOps profile for Gel (formerly EdgeDB) Cloud. Costs are
+  driven by compute unit size, storage consumed, and data transfer. The Pro
+  tier starts at $19.50/month with metered overages for storage ($0.50/GiB)
+  and transfer ($0.10/GiB). Optimization focuses on right-sizing compute
+  units and monitoring storage growth.
+sources:
+  - https://www.geldata.com/pricing
+alignedWith:
+  framework: FinOps Foundation Framework
+  frameworkUrl: https://www.finops.org/framework/
+  dataSpec: FOCUS
+  dataSpecVersion: '1.3'
+  dataSpecUrl: https://focus.finops.org/focus-specification/v1-3/
+publisherName: EdgeDB
+serviceCategory: Database
+billingModel:
+  pricingCategory: Tiered with metered overages
+  billingFrequency: Monthly
+  billingCurrency: USD
+focusColumns:
+  ServiceName: Gel Cloud
+  ServiceCategory: Database
+  ProviderName: EdgeDB (Gel Data Inc.)
+  PublisherName: EdgeDB
+  BillingCurrency: USD
+meters:
+  - name: Compute Units
+    unit: compute unit
+    aggregation: max
+  - name: Storage
+    unit: GiB
+    aggregation: max
+  - name: Data Transfer
+    unit: GiB
+    aggregation: sum
+principles:
+  - name: Visibility
+    description: >-
+      Track Gel Cloud consumption monthly by monitoring compute unit allocation,
+      storage usage, and data transfer across all instances.
+  - name: Optimization
+    description: >-
+      Right-size compute units based on query load; monitor storage growth to
+      avoid overage charges; consolidate unused or idle development instances
+      to the Free tier.
+  - name: Accountability
+    description: >-
+      Tag Gel Cloud instances by team or project using org/instance naming
+      conventions to attribute costs to business units.

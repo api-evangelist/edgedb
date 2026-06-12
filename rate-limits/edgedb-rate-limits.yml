@@ -1,0 +1,38 @@
+---
+specification: API Commons Rate Limits
+specificationVersion: '0.1'
+schema: https://raw.githubusercontent.com/api-evangelist/interface-research/main/schema/api-commons.yml#/$defs/RateLimits
+provider: EdgeDB
+providerId: edgedb
+created: '2026-06-12'
+modified: '2026-06-12'
+reconciled: true
+tags:
+  - Rate Limiting
+  - Database
+  - HTTP API
+description: >-
+  EdgeDB/Gel does not publish explicit rate limits for its HTTP EdgeQL or
+  GraphQL APIs in its public documentation as of June 2026. The HTTP API
+  enforces a single-query-per-request constraint and does not support DDL or
+  transaction commands. Connection and query throughput are constrained by
+  the compute unit size of the provisioned instance. Standard HTTP 429
+  Too Many Requests responses apply if limits are enforced server-side.
+sources:
+  - https://docs.geldata.com/reference/using/http
+  - https://docs.geldata.com/cloud/http_gql
+headers:
+  retryAfter: Retry-After
+responseCodes:
+  throttled: 429
+limits:
+  - name: EdgeQL HTTP API - Queries Per Request
+    scope: key
+    metric: queries_per_request
+    limit: 1
+    timeFrame: request
+  - name: EdgeQL HTTP API - Concurrent Connections
+    scope: org
+    metric: connections
+    limit: -1
+    timeFrame: usage
