@@ -1,0 +1,60 @@
+{
+  "@context": {
+    "@vocab": "https://schema.org/",
+    "gel": "https://www.geldata.com/vocab#",
+    "edgedb": "https://www.edgedb.com/vocab#",
+    "EdgeQLQuery": {
+      "@id": "gel:EdgeQLQuery",
+      "@type": "@id"
+    },
+    "query": {
+      "@id": "gel:query",
+      "@type": "xsd:string"
+    },
+    "variables": {
+      "@id": "gel:variables",
+      "@type": "@json"
+    },
+    "globals": {
+      "@id": "gel:globals",
+      "@type": "@json"
+    },
+    "config": {
+      "@id": "gel:config",
+      "@type": "@json"
+    },
+    "data": {
+      "@id": "gel:data",
+      "@container": "@list"
+    },
+    "error": {
+      "@id": "gel:error"
+    },
+    "branch": {
+      "@id": "gel:branch",
+      "@type": "xsd:string"
+    },
+    "instance": {
+      "@id": "gel:instance",
+      "@type": "@id"
+    },
+    "secretKey": {
+      "@id": "gel:secretKey",
+      "@type": "xsd:string"
+    },
+    "xsd": "http://www.w3.org/2001/XMLSchema#"
+  },
+  "@type": "APIReference",
+  "name": "EdgeDB / Gel API Context",
+  "description": "JSON-LD context for EdgeDB (Gel) HTTP and GraphQL APIs",
+  "url": "https://docs.geldata.com/reference/using/http",
+  "provider": {
+    "@type": "Organization",
+    "name": "Gel (EdgeDB)",
+    "url": "https://www.geldata.com",
+    "sameAs": [
+      "https://www.edgedb.com",
+      "https://github.com/geldata"
+    ]
+  }
+}
