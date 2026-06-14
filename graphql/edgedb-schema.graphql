@@ -1,0 +1,640 @@
+# EdgeDB GraphQL Schema
+#
+# Source: edb/graphql/types.py and tests/schemas/graphql.esdl in
+# https://github.com/geldata/gel (formerly edgedb/edgedb)
+#
+# EdgeDB dynamically generates a GraphQL schema from your EdgeDB schema.
+# Every object type, computed property, link, and alias is reflected
+# automatically. The types below represent the SYSTEM-LEVEL types and
+# structural patterns that EdgeDB always generates. User-defined types
+# produce additional Query fields and Mutation fields following these patterns.
+#
+# Enable with: using extension graphql;
+# Endpoint: https://<host>:<port>/branch/<branch>/graphql
+# Explorer:  https://<host>:<port>/branch/<branch>/graphql/explore
+
+schema {
+  query: Query
+  mutation: Mutation
+}
+
+# -----------------------------------------------------------------------
+# Root Query type
+# Each concrete (non-abstract) object type T in the user schema produces
+# a field here: T(filter: FilterT, order: OrderT, first: Int, last: Int,
+#                  before: String, after: String): [T!]
+# Abstract types produce an interface field returning [T!].
+# -----------------------------------------------------------------------
+type Query {
+  # Example fields generated from a typical EdgeDB schema.
+  # Actual fields depend on the user's schema object types.
+
+  # Built-in: introspection is always available via __schema, __type, etc.
+}
+
+# -----------------------------------------------------------------------
+# Root Mutation type
+# Each concrete object type T produces up to three mutation fields:
+#   insert_T(data: [InsertT!]!): [T!]
+#   update_T(filter: FilterT, order: OrderT, first: Int, last: Int,
+#            before: String, after: String, data: UpdateT!): [T!]
+#   delete_T(filter: FilterT, order: OrderT, first: Int, last: Int,
+#            before: String, after: String): [T!]
+# -----------------------------------------------------------------------
+type Mutation {
+  # Mutation fields are generated dynamically per object type.
+}
+
+# -----------------------------------------------------------------------
+# Custom scalars defined by EdgeDB's GraphQL layer
+# Source: edb/graphql/types.py (GraphQLInt64, GraphQLBigint,
+#         GraphQLDecimal, GraphQLJSON)
+# -----------------------------------------------------------------------
+
+"""The Int64 scalar represents non-fractional signed whole numeric values between -2^63 and 2^63 - 1."""
+scalar Int64
+
+"""The Bigint scalar represents arbitrary-precision integer values."""
+scalar Bigint
+
+"""The Decimal scalar represents arbitrary-precision decimal numbers."""
+scalar Decimal
+
+"""The JSON scalar represents arbitrary JSON-serialisable values (serialised as String)."""
+scalar JSON
+
+# -----------------------------------------------------------------------
+# Ordering enums (always present)
+# Source: edb/graphql/types.py define_enums()
+# -----------------------------------------------------------------------
+
+"""Enum value used to specify ordering direction."""
+enum directionEnum {
+  ASC
+  DESC
+}
+
+"""Enum value used to specify how nulls are ordered."""
+enum nullsOrderingEnum {
+  SMALLEST
+  BIGGEST
+}
+
+"""Input type for ordering a single field."""
+input Ordering {
+  dir: directionEnum!
+  nulls: nullsOrderingEnum
+}
+
+# -----------------------------------------------------------------------
+# Generic filter input types (always present for each scalar type)
+# Source: edb/graphql/types.py define_generic_filter_types()
+# Naming pattern: Filter<ScalarTypeName>
+# -----------------------------------------------------------------------
+
+input FilterBoolean {
+  exists: Boolean
+  in: [Boolean!]
+  eq: Boolean
+  neq: Boolean
+}
+
+input FilterID {
+  exists: Boolean
+  in: [ID!]
+  eq: ID
+  neq: ID
+}
+
+input FilterInt {
+  exists: Boolean
+  in: [Int!]
+  eq: Int
+  neq: Int
+  gte: Int
+  gt: Int
+  lte: Int
+  lt: Int
+}
+
+input FilterInt64 {
+  exists: Boolean
+  in: [Int64!]
+  eq: Int64
+  neq: Int64
+  gte: Int64
+  gt: Int64
+  lte: Int64
+  lt: Int64
+}
+
+input FilterBigint {
+  exists: Boolean
+  in: [Bigint!]
+  eq: Bigint
+  neq: Bigint
+  gte: Bigint
+  gt: Bigint
+  lte: Bigint
+  lt: Bigint
+}
+
+input FilterFloat {
+  exists: Boolean
+  in: [Float!]
+  eq: Float
+  neq: Float
+  gte: Float
+  gt: Float
+  lte: Float
+  lt: Float
+}
+
+input FilterDecimal {
+  exists: Boolean
+  in: [Decimal!]
+  eq: Decimal
+  neq: Decimal
+  gte: Decimal
+  gt: Decimal
+  lte: Decimal
+  lt: Decimal
+}
+
+input FilterString {
+  exists: Boolean
+  in: [String!]
+  eq: String
+  neq: String
+  gte: String
+  gt: String
+  lte: String
+  lt: String
+  like: String
+  ilike: String
+}
+
+input FilterJSON {
+  exists: Boolean
+  in: [JSON!]
+  eq: JSON
+  neq: JSON
+  gte: JSON
+  gt: JSON
+  lte: JSON
+  lt: JSON
+}
+
+# -----------------------------------------------------------------------
+# Range input types
+# Source: edb/graphql/types.py get_input_range_type()
+# Naming pattern: RangeOf<ScalarTypeName>
+# -----------------------------------------------------------------------
+
+"""Range of Float values"""
+input RangeOfFloat {
+  lower: Float
+  inc_lower: Boolean
+  upper: Float
+  inc_upper: Boolean
+  empty: Boolean
+}
+
+"""Range of Int64 values"""
+input RangeOfInt64 {
+  lower: Int64
+  inc_lower: Boolean
+  upper: Int64
+  inc_upper: Boolean
+  empty: Boolean
+}
+
+"""Range of String values (for cal::local_date ranges)"""
+input RangeOfString {
+  lower: String
+  inc_lower: Boolean
+  upper: String
+  inc_upper: Boolean
+  empty: Boolean
+}
+
+# -----------------------------------------------------------------------
+# Illustrative user-defined types from the official test schema
+# Source: tests/schemas/graphql.esdl in geldata/gel
+#
+# These represent the PATTERN that EdgeDB generates for user schemas.
+# In a real database these types are auto-generated from your .esdl schema.
+# -----------------------------------------------------------------------
+
+"""An object with a name (abstract type mapped to GraphQL interface)."""
+interface NamedObject {
+  id: ID!
+  name: String!
+}
+
+"""A user group containing settings."""
+interface UserGroup {
+  id: ID!
+  name: String!
+  settings(
+    filter: FilterUserGroup_settings
+    order: Ordering
+    first: Int
+    last: Int
+    before: String
+    after: String
+  ): [Setting!]
+}
+
+type UserGroup_Type implements UserGroup & NamedObject {
+  id: ID!
+  name: String!
+  settings(
+    filter: FilterUserGroup_settings
+    order: Ordering
+    first: Int
+    last: Int
+    before: String
+    after: String
+  ): [Setting!]
+}
+
+"""A key-value setting."""
+interface Setting {
+  id: ID!
+  name: String!
+  value: String!
+}
+
+type Setting_Type implements Setting & NamedObject {
+  id: ID!
+  name: String!
+  value: String!
+}
+
+"""A user profile with tags and computed links."""
+interface Profile {
+  id: ID!
+  name: String!
+  value: String!
+  tags: [String]
+  odd: [[Int64]]
+  owner_user(
+    filter: FilterProfile_owner_user
+    order: Ordering
+    first: Int
+    last: Int
+    before: String
+    after: String
+  ): [User!]
+  owner_name: String
+}
+
+type Profile_Type implements Profile & NamedObject {
+  id: ID!
+  name: String!
+  value: String!
+  tags: [String]
+  odd: [[Int64]]
+  owner_user(
+    filter: FilterProfile_owner_user
+    order: Ordering
+    first: Int
+    last: Int
+    before: String
+    after: String
+  ): [User!]
+  owner_name: String
+}
+
+"""A user with groups, profile, and favorites."""
+interface User {
+  id: ID!
+  name: String!
+  active: Boolean!
+  age: Int64!
+  score: Float!
+  groups(
+    filter: FilterUser_groups
+    order: Ordering
+    first: Int
+    last: Int
+    before: String
+    after: String
+  ): [UserGroup!]
+  profile(
+    filter: FilterUser_profile
+    order: Ordering
+    first: Int
+    last: Int
+    before: String
+    after: String
+  ): Profile
+  favorites(
+    filter: FilterUser_favorites
+    order: Ordering
+    first: Int
+    last: Int
+    before: String
+    after: String
+  ): [NamedObject!]
+  fav_users(
+    filter: FilterUser_fav_users
+    order: Ordering
+    first: Int
+    last: Int
+    before: String
+    after: String
+  ): [User!]
+}
+
+type User_Type implements User & NamedObject {
+  id: ID!
+  name: String!
+  active: Boolean!
+  age: Int64!
+  score: Float!
+  groups(
+    filter: FilterUser_groups
+    order: Ordering
+    first: Int
+    last: Int
+    before: String
+    after: String
+  ): [UserGroup!]
+  profile(
+    filter: FilterUser_profile
+    order: Ordering
+    first: Int
+    last: Int
+    before: String
+    after: String
+  ): Profile
+  favorites(
+    filter: FilterUser_favorites
+    order: Ordering
+    first: Int
+    last: Int
+    before: String
+    after: String
+  ): [NamedObject!]
+  fav_users(
+    filter: FilterUser_fav_users
+    order: Ordering
+    first: Int
+    last: Int
+    before: String
+    after: String
+  ): [User!]
+}
+
+"""A type extending User (same fields, separate concrete type)."""
+interface Person {
+  id: ID!
+  name: String!
+  active: Boolean!
+  age: Int64!
+  score: Float!
+}
+
+type Person_Type implements Person & User & NamedObject {
+  id: ID!
+  name: String!
+  active: Boolean!
+  age: Int64!
+  score: Float!
+}
+
+"""Type mapping all EdgeDB scalar types to GraphQL scalars."""
+interface ScalarTest {
+  id: ID!
+  p_bool: Boolean
+  p_str: String
+  p_datetime: String
+  p_local_datetime: String
+  p_local_date: String
+  p_local_time: String
+  p_duration: String
+  p_int16: Int
+  p_int32: Int
+  p_int64: Int64
+  p_bigint: Bigint
+  p_float32: Float
+  p_float64: Float
+  p_decimal: Decimal
+  p_decimal_str: String
+  p_json: JSON
+  p_posint: Int64
+  p_array_str: [String]
+  p_array_int64: [Int64]
+  p_array_json: [JSON]
+  p_short_str: String
+}
+
+type ScalarTest_Type implements ScalarTest {
+  id: ID!
+  p_bool: Boolean
+  p_str: String
+  p_datetime: String
+  p_local_datetime: String
+  p_local_date: String
+  p_local_time: String
+  p_duration: String
+  p_int16: Int
+  p_int32: Int
+  p_int64: Int64
+  p_bigint: Bigint
+  p_float32: Float
+  p_float64: Float
+  p_decimal: Decimal
+  p_decimal_str: String
+  p_json: JSON
+  p_posint: Int64
+  p_array_str: [String]
+  p_array_int64: [Int64]
+  p_array_json: [JSON]
+  p_short_str: String
+}
+
+"""Type with range properties."""
+interface RangeTest {
+  id: ID!
+  name: String!
+  rval: RangeOfFloat
+  mval: [RangeOfFloat]
+  rdate: RangeOfString
+  mdate: [RangeOfString]
+}
+
+type RangeTest_Type implements RangeTest {
+  id: ID!
+  name: String!
+  rval: RangeOfFloat
+  mval: [RangeOfFloat]
+  rdate: RangeOfString
+  mdate: [RangeOfString]
+}
+
+# -----------------------------------------------------------------------
+# Filter input types for user-defined object types
+# Source: edb/graphql/types.py get_filter_fields()
+# Naming pattern: Filter<TypeName> with and/or/not plus per-field filters
+# -----------------------------------------------------------------------
+
+input FilterSetting {
+  and: [FilterSetting!]
+  or: [FilterSetting!]
+  not: FilterSetting
+  id: FilterID
+  name: FilterString
+  value: FilterString
+}
+
+input FilterUserGroup {
+  and: [FilterUserGroup!]
+  or: [FilterUserGroup!]
+  not: FilterUserGroup
+  id: FilterID
+  name: FilterString
+}
+
+input FilterProfile {
+  and: [FilterProfile!]
+  or: [FilterProfile!]
+  not: FilterProfile
+  id: FilterID
+  name: FilterString
+  value: FilterString
+}
+
+input FilterUser {
+  and: [FilterUser!]
+  or: [FilterUser!]
+  not: FilterUser
+  id: FilterID
+  name: FilterString
+  active: FilterBoolean
+  age: FilterInt64
+  score: FilterFloat
+}
+
+# Nested filter types (for filtering through links)
+input FilterUserGroup_settings {
+  exists: Boolean
+  id: FilterID
+  name: FilterString
+  value: FilterString
+}
+
+input FilterProfile_owner_user {
+  exists: Boolean
+  id: FilterID
+  name: FilterString
+  active: FilterBoolean
+  age: FilterInt64
+}
+
+input FilterUser_groups {
+  exists: Boolean
+  id: FilterID
+  name: FilterString
+}
+
+input FilterUser_profile {
+  exists: Boolean
+  id: FilterID
+  name: FilterString
+  value: FilterString
+}
+
+input FilterUser_favorites {
+  exists: Boolean
+  id: FilterID
+  name: FilterString
+}
+
+input FilterUser_fav_users {
+  exists: Boolean
+  id: FilterID
+  name: FilterString
+}
+
+# -----------------------------------------------------------------------
+# Insert input types for mutations
+# Source: edb/graphql/types.py get_insert_fields()
+# Naming pattern: Insert<TypeName>
+# -----------------------------------------------------------------------
+
+input InsertSetting {
+  name: String!
+  value: String!
+}
+
+input InsertUserGroup {
+  name: String!
+  settings: [InsertSetting!]
+}
+
+input InsertProfile {
+  name: String!
+  value: String!
+  tags: [String]
+  odd: [[Int64]]
+}
+
+input InsertUser {
+  name: String!
+  active: Boolean
+  age: Int64!
+  score: Float
+  groups: [InsertUserGroup!]
+  profile: InsertProfile
+}
+
+# -----------------------------------------------------------------------
+# Update input types for mutations
+# Source: edb/graphql/types.py get_update_fields()
+# Naming pattern: Update<TypeName> — each field wrapped in update ops
+# -----------------------------------------------------------------------
+
+input UpdateOpString {
+  set: String
+}
+
+input UpdateOpBoolean {
+  set: Boolean
+}
+
+input UpdateOpInt64 {
+  set: Int64
+  increment: Int64
+  decrement: Int64
+}
+
+input UpdateOpFloat {
+  set: Float
+  increment: Float
+  decrement: Float
+}
+
+input UpdateSetting {
+  name: UpdateOpString
+  value: UpdateOpString
+}
+
+input UpdateUserGroup {
+  name: UpdateOpString
+}
+
+input UpdateProfile {
+  name: UpdateOpString
+  value: UpdateOpString
+  tags: UpdateOpString
+}
+
+input UpdateUser {
+  name: UpdateOpString
+  active: UpdateOpBoolean
+  age: UpdateOpInt64
+  score: UpdateOpFloat
+}

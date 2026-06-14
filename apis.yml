@@ -1,105 +1,101 @@
----
 aid: edgedb
 name: EdgeDB
-description: >-
-  EdgeDB (rebranded as Gel in 2025) is an open-source object-relational database
-  built on top of PostgreSQL that combines a modern graph-relational data model
-  with a powerful query language called EdgeQL. It provides an HTTP-based EdgeQL
-  query API and a GraphQL API, allowing developers to query their database over
-  standard HTTP using bearer token authentication. EdgeDB Cloud offers a fully
-  managed hosting service with free and paid tiers, integrating with platforms
-  such as Vercel, Netlify, Fly.io, and Railway. Client libraries are available
-  for TypeScript, Python, Go, Dart, Rust, .NET, and Java.
+description: EdgeDB (rebranded as Gel in 2025) is an open-source object-relational
+  database built on top of PostgreSQL that combines a modern graph-relational data
+  model with a powerful query language called EdgeQL. It provides an HTTP-based EdgeQL
+  query API and a GraphQL API, allowing developers to query their database over standard
+  HTTP using bearer token authentication. EdgeDB Cloud offers a fully managed hosting
+  service with free and paid tiers, integrating with platforms such as Vercel, Netlify,
+  Fly.io, and Railway. Client libraries are available for TypeScript, Python, Go,
+  Dart, Rust, .NET, and Java.
 type: Index
 image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
 tags:
-  - Database
-  - PostgreSQL
-  - Graph Database
-  - Object-Relational
-  - EdgeQL
-  - GraphQL
-  - HTTP API
-  - Cloud Database
+- Database
+- PostgreSQL
+- Graph Database
+- Object-Relational
+- EdgeQL
+- GraphQL
+- HTTP API
+- Cloud Database
 url: https://raw.githubusercontent.com/api-evangelist/edgedb/refs/heads/main/apis.yml
 created: '2026-06-12'
 modified: '2026-06-12'
 specificationVersion: '0.19'
 apis:
-  - aid: edgedb:edgeql-http-api
-    name: EdgeDB EdgeQL HTTP API
-    description: >-
-      Executes EdgeQL queries over HTTP against a Gel/EdgeDB instance. Supports
-      GET and POST requests with query, variables, globals, and config fields.
-      Authentication uses HTTP Basic (password), Bearer token (secret key for
-      Cloud), or JWT. DDL and transaction commands are not supported; only one
-      query per request is allowed.
-    humanURL: https://docs.geldata.com/reference/using/http
-    baseURL: https://<hostname>:<port>/branch/<branch-name>/edgeql
-    tags:
-      - Database
-      - EdgeQL
-      - HTTP API
-      - Query
-    properties:
-      - type: Documentation
-        url: https://docs.geldata.com/reference/using/http
-  - aid: edgedb:graphql-api
-    name: EdgeDB GraphQL API
-    description: >-
-      Provides a GraphQL endpoint for querying an EdgeDB/Gel instance, supporting
-      queries, mutations, and introspection. Enabled via the graphql extension in
-      the schema. Authentication uses the same secret key bearer token mechanism
-      as the HTTP EdgeQL API.
-    humanURL: https://docs.geldata.com/cloud/http_gql
-    baseURL: https://<hostname>:<port>/branch/<branch-name>/graphql
-    tags:
-      - Database
-      - GraphQL
-      - API
-      - Query
-    properties:
-      - type: Documentation
-        url: https://docs.geldata.com/cloud/http_gql
-  - aid: edgedb:cloud-management
-    name: EdgeDB Cloud Management
-    description: >-
-      Managed cloud database service for provisioning and operating EdgeDB/Gel
-      instances. Accessible via the Gel CLI, web dashboard at cloud.geldata.com,
-      and platform integrations. Supports secret key creation, instance management,
-      and environment variable configuration.
-    humanURL: https://docs.geldata.com/cloud
-    baseURL: https://cloud.geldata.com
-    tags:
-      - Cloud
-      - Database Management
-      - DevOps
-    properties:
-      - type: Documentation
-        url: https://docs.geldata.com/cloud
-common:
-  - type: Website
-    url: https://www.geldata.com
+- aid: edgedb:edgeql-http-api
+  name: EdgeDB EdgeQL HTTP API
+  description: Executes EdgeQL queries over HTTP against a Gel/EdgeDB instance. Supports
+    GET and POST requests with query, variables, globals, and config fields. Authentication
+    uses HTTP Basic (password), Bearer token (secret key for Cloud), or JWT. DDL and
+    transaction commands are not supported; only one query per request is allowed.
+  humanURL: https://docs.geldata.com/reference/using/http
+  baseURL: https://<hostname>:<port>/branch/<branch-name>/edgeql
+  tags:
+  - Database
+  - EdgeQL
+  - HTTP API
+  - Query
+  properties:
   - type: Documentation
-    url: https://docs.geldata.com
-  - type: GitHubOrganization
-    url: https://github.com/geldata
-  - type: LinkedIn
-    url: https://www.linkedin.com/company/geldata
-  - type: Blog
-    url: https://www.geldata.com/blog
-  - type: Pricing
-    url: https://www.geldata.com/pricing
-  - type: X
-    url: https://twitter.com/geldata
-  - type: Changelog
-    url: https://www.geldata.com/updates
-  - type: Plans
-    url: plans/edgedb-plans-pricing.yml
-  - type: RateLimits
-    url: rate-limits/edgedb-rate-limits.yml
-  - type: FinOps
-    url: finops/edgedb-finops.yml
+    url: https://docs.geldata.com/reference/using/http
+- aid: edgedb:graphql-api
+  name: EdgeDB GraphQL API
+  description: Provides a GraphQL endpoint for querying an EdgeDB/Gel instance, supporting
+    queries, mutations, and introspection. Enabled via the graphql extension in the
+    schema. Authentication uses the same secret key bearer token mechanism as the
+    HTTP EdgeQL API.
+  humanURL: https://docs.geldata.com/cloud/http_gql
+  baseURL: https://<hostname>:<port>/branch/<branch-name>/graphql
+  tags:
+  - Database
+  - GraphQL
+  - API
+  - Query
+  properties:
+  - type: Documentation
+    url: https://docs.geldata.com/cloud/http_gql
+  - url: graphql/edgedb-graphql.md
+    type: GraphQL
+- aid: edgedb:cloud-management
+  name: EdgeDB Cloud Management
+  description: Managed cloud database service for provisioning and operating EdgeDB/Gel
+    instances. Accessible via the Gel CLI, web dashboard at cloud.geldata.com, and
+    platform integrations. Supports secret key creation, instance management, and
+    environment variable configuration.
+  humanURL: https://docs.geldata.com/cloud
+  baseURL: https://cloud.geldata.com
+  tags:
+  - Cloud
+  - Database Management
+  - DevOps
+  properties:
+  - type: Documentation
+    url: https://docs.geldata.com/cloud
+common:
+- type: Website
+  url: https://www.geldata.com
+- type: Documentation
+  url: https://docs.geldata.com
+- type: GitHubOrganization
+  url: https://github.com/geldata
+- type: LinkedIn
+  url: https://www.linkedin.com/company/geldata
+- type: Blog
+  url: https://www.geldata.com/blog
+- type: Pricing
+  url: https://www.geldata.com/pricing
+- type: X
+  url: https://twitter.com/geldata
+- type: Changelog
+  url: https://www.geldata.com/updates
+- type: Plans
+  url: plans/edgedb-plans-pricing.yml
+- type: RateLimits
+  url: rate-limits/edgedb-rate-limits.yml
+- type: FinOps
+  url: finops/edgedb-finops.yml
 maintainers:
-  - FN: Kin Lane
-    email: kin@apievangelist.com
+- FN: Kin Lane
+  email: kin@apievangelist.com
