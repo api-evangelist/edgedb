@@ -88,7 +88,7 @@ common:
   url: https://www.geldata.com/pricing
 - type: X
   url: https://twitter.com/geldata
-- type: Changelog
+- type: ChangeLog
   url: https://www.geldata.com/updates
 - type: Plans
   url: plans/edgedb-plans-pricing.yml
