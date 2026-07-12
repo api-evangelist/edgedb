@@ -74,6 +74,8 @@ apis:
   - type: Documentation
     url: https://docs.geldata.com/cloud
 common:
+- type: DomainSecurity
+  url: security/edgedb-domain-security.yml
 - type: Website
   url: https://www.geldata.com
 - type: Documentation
