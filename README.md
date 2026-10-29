@@ -1,4 +1,4 @@
-# EdgeDB (edgedb)
+# EdgeDB
 
 <!-- API-EVANGELIST-PROVENANCE:BEGIN -->
 > ### About this repository
@@ -64,49 +64,120 @@
 > Full detail: **[Where this data comes from](https://apievangelist.com/about/where-our-data-comes-from)**
 <!-- API-EVANGELIST-PROVENANCE:END -->
 
-EdgeDB (rebranded as Gel in 2025) is an open-source object-relational database built on PostgreSQL, combining a modern graph-relational data model with the EdgeQL query language. It provides HTTP and GraphQL APIs for querying databases over standard HTTP, a fully managed cloud service, and client libraries for TypeScript, Python, Go, Dart, Rust, .NET, and Java.
+EdgeDB (rebranded as Gel in 2025) is an open-source object-relational database built on top of PostgreSQL that combines a modern graph-relational data model with a powerful query language called EdgeQL. It provides an HTTP-based EdgeQL query API and a GraphQL API, allowing developers to query their database over standard HTTP using bearer token authentication. EdgeDB Cloud offers a fully managed hosting service with free and paid tiers, integrating with platforms such as Vercel, Netlify, Fly.io, and Railway. Client libraries are available for TypeScript, Python, Go, Dart, Rust, .NET, and Java.
 
-- **APIs.json:** [https://raw.githubusercontent.com/api-evangelist/edgedb/refs/heads/main/apis.yml](https://raw.githubusercontent.com/api-evangelist/edgedb/refs/heads/main/apis.yml)
-- **Naftiko Fleet:** [https://github.com/naftiko/fleet?utm_source=api-evangelist&utm_medium=readme&utm_campaign=edgedb-api-evangelist&utm_content=repo](https://github.com/naftiko/fleet?utm_source=api-evangelist&utm_medium=readme&utm_campaign=edgedb-api-evangelist&utm_content=repo)
+**Areas:** Database · PostgreSQL · Graph Database · Object-Relational · EdgeQL · GraphQL · HTTP API · Cloud Database
 
-## Tags
+## EdgeDB on APIs.io
 
-Database, PostgreSQL, Graph Database, Object-Relational, EdgeQL, GraphQL, HTTP API, Cloud Database
+Everything profiled for EdgeDB is published on APIs.io rather than in this repository. Start at the provider page — **[apis.io/providers/edgedb/](https://apis.io/providers/edgedb/)** — or go straight to one of the APIs or properties below.
 
-## APIs
+### APIs (3)
 
-| API | Description | Docs |
-|-----|-------------|------|
-| EdgeDB EdgeQL HTTP API | Execute EdgeQL queries over HTTP with bearer token or basic auth | [Docs](https://docs.geldata.com/reference/using/http) |
-| EdgeDB GraphQL API | GraphQL queries and mutations against an EdgeDB instance | [Docs](https://docs.geldata.com/cloud/http_gql) |
-| EdgeDB Cloud Management | Managed cloud database service via CLI, web dashboard, and platform integrations | [Docs](https://docs.geldata.com/cloud) |
+- [EdgeDB EdgeQL HTTP API](https://apis.io/apis/edgedb/edgeql-http-api/) — Executes EdgeQL queries over HTTP against a Gel/EdgeDB instance. Supports GET and POST requests with query, variables, globals, and config fields.…
+- [EdgeDB GraphQL API](https://apis.io/apis/edgedb/graphql-api/) — Provides a GraphQL endpoint for querying an EdgeDB/Gel instance, supporting queries, mutations, and introspection. Enabled via the graphql extension in the…
+- [EdgeDB Cloud Management](https://apis.io/apis/edgedb/cloud-management/) — Managed cloud database service for provisioning and operating EdgeDB/Gel instances. Accessible via the Gel CLI, web dashboard at cloud.geldata.com, and…
 
-## Plans / Rate Limits / FinOps
+### Published properties
 
-| Resource | File |
-|----------|------|
-| Plans & Pricing | [plans/edgedb-plans-pricing.yml](plans/edgedb-plans-pricing.yml) |
-| Rate Limits | [rate-limits/edgedb-rate-limits.yml](rate-limits/edgedb-rate-limits.yml) |
-| FinOps | [finops/edgedb-finops.yml](finops/edgedb-finops.yml) |
+Each property below is a page on APIs.io carrying the machine-readable artifact and what it says.
 
-## Timestamps
+#### GraphQL (1)
 
-- **Created:** 2026-06-12
-- **Modified:** 2026-06-12
+GraphQL schemas.
 
-## Common Properties
+- [EdgeDB GraphQL API](https://apis.io/graphqls/edgedb/edgedb-graphql/)
 
-| Type | URL |
-|------|-----|
-| Website | https://www.geldata.com |
-| Documentation | https://docs.geldata.com |
-| GitHub Organization | https://github.com/geldata |
-| LinkedIn | https://www.linkedin.com/company/geldata |
-| Blog | https://www.geldata.com/blog |
-| Pricing | https://www.geldata.com/pricing |
-| X (Twitter) | https://twitter.com/geldata |
-| Changelog | https://www.geldata.com/updates |
+#### JSON-LD (1)
 
-## Maintainers
+Linked-data contexts for the provider's vocabulary.
 
-- **Kin Lane** — kin@apievangelist.com
+- [Edgedb Context](https://apis.io/jsonld/edgedb/edgedb-context/)
+
+#### Security (1)
+
+Authentication, trust centre, and vulnerability disclosure.
+
+- [Edgedb Domain Security](https://apis.io/security/edgedb/edgedb-domain-security/)
+
+#### Plans and pricing (1)
+
+Published plans, tiers and prices.
+
+- [Edgedb Plans Pricing](https://apis.io/plans/edgedb/edgedb-plans-pricing/)
+
+#### Rate limits (1)
+
+Published request limits.
+
+- [Edgedb Rate Limits](https://apis.io/rate-limits/edgedb/edgedb-rate-limits/)
+
+#### FinOps (1)
+
+What the API costs to run, by operation.
+
+- [Edgedb Finops](https://apis.io/finops/edgedb/edgedb-finops/)
+
+## Where to find this API
+
+Links to the company's own pages. This repository publishes no copy of their specifications — the canonical document is theirs and lives at the URLs below.
+
+- [Website](https://www.geldata.com)
+- [Documentation](https://docs.geldata.com)
+- [Pricing](https://www.geldata.com/pricing)
+- [Changelog](https://www.geldata.com/updates)
+- [Blog](https://www.geldata.com/blog)
+- [GitHub](https://github.com/geldata)
+
+## API Evangelist rating
+
+**Kin Score 26.5** — thin · rubric 0.24.0 · scored 2026-10-17
+
+| Facet | Score |
+|---|---|
+| Discoverability | 71.4 |
+| Contract quality | 43.6 |
+| Contract governance | 0.0 |
+| Operational transparency | 23.7 |
+| Developer ergonomics | 11.9 |
+| Access clarity | 18.4 |
+
+**Agent readiness 13.6** — agent-aware
+
+| Agent-readiness dimension | Result |
+|---|---|
+| Spec Presence | yes |
+| Agentic Access | — |
+| Reversibility Documented | — |
+| MCP Server | — |
+| Auth Clarity | — |
+| Idempotency | — |
+| Error Semantics | — |
+| OpenAPI Examples | — |
+| Rate Limit Signal | derived (partial credit) |
+| Event Surface Described | — |
+| Agent Skills | — |
+| Well Known Catalog | — |
+| Consent Identity | — |
+| Agent Card | — |
+| Dry Run Mode | — |
+| Delegated Identity | — |
+| Protected Resource Metadata | — |
+| Dynamic Client Registration | — |
+| Agentic Commerce | — |
+
+**Regulatory alignment 10.8** — Horizontal (data, software, accessibility, platform)
+
+The rubric is published at [github.com/api-evangelist/kin-score](https://github.com/api-evangelist/kin-score). The per-check breakdown behind these numbers — which checks were earned, partial or missed — along with score history and how this provider compares to its peers, is available at [apis.io/providers/edgedb/](https://apis.io/providers/edgedb/).
+
+## How this profile is made
+
+API Evangelist profiles a company's public API surface the way a developer would find it: the website, developer portal and documentation, the specifications it publishes, its public repositories, and its pricing, status and changelog pages. From that it derives the properties above — contracts split per API, workflows, schemas, collections, governance rules, plans and rate limits — and scores them against the published [Kin Score rubric](https://github.com/api-evangelist/kin-score).
+
+The artifacts are published on [APIs.io](https://apis.io), not in this repository. This repository is the public record for EdgeDB: the place to say something is wrong, missing or out of date, and to ask for a re-score or a removal.
+
+## Open an issue
+
+- **Something about this listing** — a wrong description, a missing API, a stale artifact or a question about the rating: [open an issue on this repository](https://github.com/api-evangelist/edgedb/issues/new).
+- **A new API, or one that is not in the catalog yet** — [submit it on APIs.io](https://apis.io/add/).
+- **Anything else** — [the APIs.io inbox](https://github.com/api-search/inbox/issues/new) or [info@apievangelist.com](mailto:info@apievangelist.com).
